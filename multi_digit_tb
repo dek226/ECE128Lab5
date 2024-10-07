@@ -1,0 +1,46 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 10/04/2024 02:15:00 PM
+// Design Name: 
+// Module Name: lab_5_tb
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+////////////////////////////////////////////////////////////////////////////////////
+`default_nettype none
+
+module lab_5_tb;
+    reg clk;
+	reg [15:0] BCD_in;
+	wire [6:0] seg_cathode;
+	wire [3:0] seg_anode;
+    
+    top_multi_digit DUT(clk, BCD_in, seg_cathode, seg_anode);
+    //anode_gen DUT(clk, seg_anode);
+    //refresh_counter DUT(clk, o_q);
+    
+    always
+    begin
+        #5 clk = ~clk;
+    end
+    
+    initial begin
+        clk = 0;
+        #10
+        //          |bytebytebytebyte|
+        BCD_in = 16'b0001001000110100;
+     #120 $stop;
+     end
+   
+endmodule
